@@ -49,7 +49,7 @@ Wave 2 adds **disinfectant / antiseptic FORMULATION** (希釈・配合, NOT de-n
 ## Cell pattern (per ADR-2605192415 §B, silicon Wave 1 silicon_* mirror)
 
 ```
-40-engine/kotoba/crates/kotoba-kotodama/cells/pharma_{phase_name}/
+kotoba-lang/kotodama-cells/pharma_{phase_name}/
 ├── README.md                 # input/output Lexicon + state schema
 ├── __init__.py               # one-line module marker
 ├── cell.py                   # COUNCIL_ATTESTATION_TX_HASH + SILEN_PHARMA_BASELINE_REVIEW_CID gate
@@ -97,4 +97,4 @@ Do NOT skip phases. Each R transition is its own ADR.
 - [ADR-2605181100](../../90-docs/adr/2605181100-etzhayyim-encrypted-confidentiality-substrate.md) (XChaCha20 envelope for patient AE)
 - [ADR-2605231525](../../90-docs/adr/2605231525-no-server-key-invariant.md) (G13 enforcement)
 - [`20-actors/kuni-umi/CLAUDE.md`](../kuni-umi/CLAUDE.md) (sibling actor — robotics class ontology source)
-- [`40-engine/kotoba/crates/kotoba-kotodama/cells/README.md`](../kotodama/cells/README.md) (sibling cell catalog)
+- [`kotoba-lang/kotodama-cells/README.md`](../kotodama/cells/README.md) (sibling cell catalog)
