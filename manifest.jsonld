@@ -469,7 +469,7 @@
     "actors": [
       "kuni-umi (robotics class ontology source — Hitogata / Mimi / Otete reused)",
       "tsukuru (silen-pharma-review pattern reuse from silen-force-review)",
-      "unispsc (raw material supplier discovery)"
+      "unspsc (raw material supplier discovery)"
     ],
     "substrate": "AT MST + IPFS + Base L2 anchor via @etzhayyim/sdk"
   },
