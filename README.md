@@ -117,6 +117,16 @@ Removal of the gate requires:
 3. QP-equivalent on Council (G4)
 4. R1+ phase ADR landing with explicit `50-infra/murakumo/fleet.toml` activation
 
+## Migration Boundary
+
+`kotoba-lang/kotodama-cells/pharma_*` is legacy source
+during migration. New yakushi cell orchestration belongs in
+`src/yakushi/murakumo.cljc` as pure `.cljc` actor plans. The plans preserve R0
+scaffold behavior by emitting no write effects until Council, silen-pharma, QP,
+facility, and registry attestations required by each cell are supplied. Host
+placement remains in `kotoba-lang/murakumo`; AT Protocol/PDS surfaces remain in
+`gftdcojp/app-aozora`.
+
 ## Lexicon namespace
 
 `com.etzhayyim.pharma.*` — 8 lexicons under
