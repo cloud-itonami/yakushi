@@ -89,7 +89,9 @@ Wave 1/1b/1c は **薬** (de-novo 合成 OTC 医薬品)。Wave 2 は **消毒液
 - **G23 flammable-labeling** — アルコール系は火気厳禁ラベル必須
 - **G24 use-class** — `{surface, skin-antiseptic, hand-hygiene}` を宣言
 
-実装は **clj-native SSoT** (`py/agent.clj` の `record_formulation` ほか + `py/test_agent.clj` +22 tests; 計 48 green)。
+実装は **clj-native SSoT** (`src/yakushi/methods/agent.cljc`、tests は
+`test/yakushi`)。canonical metadata/data/contracts は EDN、外部 JSON-LD は
+`wire/` のみに置く。全 suite は `bb test` で実行する。
 新 cell `formulation` + lex `formulationAttestation` + entity `:formulationAttestation/*`。Python counterpart なし。
 
 ## Pregel cells (R0 scaffold-only — Council activation gated)
@@ -202,4 +204,4 @@ Each R-phase is its own ADR.
 - [ADR-2605201400](../../90-docs/adr/2605201400-etzhayyim-kuni-umi-planetary-infra-fleet.md) — kuni-umi parent producer (robotics class ontology)
 - [ADR-2605192415](../../90-docs/adr/2605192415-etzhayyim-religious-corp-daemon-architecture.md) — 3-tier actor + Murakumo placement pattern
 - [`50-infra/murakumo/fleet.toml`](../../50-infra/murakumo/fleet.toml) — node ↔ cell placement
-- [`kotoba-lang/kotodama-cells/README.md`](../kotodama/cells/README.md) — sibling cell catalog
+- [`40-engine/kotoba/crates/kotoba-kotodama/cells/README.md`](../kotodama/cells/README.md) — sibling cell catalog

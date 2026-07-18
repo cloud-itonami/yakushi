@@ -28,12 +28,31 @@
 #?(:clj
    (do
      (def ^:private here (.getParentFile (java.io.File. ^String *file*)))      ;; methods/
-     (def ^:private actor-dir (.getParentFile here))                          ;; yakushi/
+     (def ^:private actor-dir (-> here .getParentFile .getParentFile .getParentFile)) ;; repo/
      (def ^:private lexdir (java.io.File. actor-dir "lex"))
+     (defn- unblob
+       "lex/*.edn entries were datomized (ADR: EDN datomize fan-out) — non-scalar
+       values (e.g. :defs) are pr-str'd blob strings. Parse back to a coll if so;
+       leave genuinely-scalar strings (:id) untouched."
+       [v]
+       (if (string? v)
+         (try (let [parsed (edn/read-string v)] (if (coll? parsed) parsed v))
+              (catch Exception _ v))
+         v))
+     (defn- reconstitute-entity
+       "Reconstitutes the pre-datomize bare map ({:lexicon .. :id .. :defs ..})
+       from a datomized tx-data entity ([{:db/id -1 :lex.<name>/lexicon .. ...}])
+       so downstream key lookups (:defs / :id / :lexicon) keep working unchanged."
+       [tx-data]
+       (into {} (map (fn [[k v]] [(keyword (name k)) (unblob v)]))
+             (dissoc (first tx-data) :db/id)))
      (defn- lex [name]
-       (edn/read-string (slurp (java.io.File. lexdir (str name ".edn")))))
+       (let [content (edn/read-string (slurp (java.io.File. lexdir (str name ".edn"))))]
+         (if (and (vector? content) (seq content) (map? (first content)) (contains? (first content) :db/id))
+           (reconstitute-entity content)
+           content)))
      (defn- manifest []
-       (json/parse-string (slurp (java.io.File. actor-dir "manifest.jsonld"))))))
+       (:actor/manifest (clojure.edn/read-string (slurp (java.io.File. actor-dir "manifest.edn")))))))
 
 (defn- record-node [doc] (get-in doc [:defs :main :record]))
 (defn- required-of [doc] (set (:required (record-node doc))))

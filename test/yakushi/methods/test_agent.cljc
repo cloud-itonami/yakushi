@@ -1,9 +1,9 @@
-(ns yakushi.py.test-agent
+(ns yakushi.methods.test-agent
   "yakushi 薬師 — agent gate tests. 1:1 port of py/test_agent.py (custom harness → clojure.test).
   Offline: OTC Wave 1 (G1), silen-pharma-review (G3), QP co-sign (G4), adverse-event aggregation
   (G5/G10), witness invariant (G9), record handlers, USDC + tithe settlement (G17/G18)."
   (:require [clojure.test :refer [deftest is]]
-            [yakushi.py.agent :as agent]))
+            [yakushi.methods.agent :as agent]))
 
 (defn- blocked? [r] (contains? r "blocked"))
 

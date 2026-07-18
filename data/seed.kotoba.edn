@@ -41,7 +41,7 @@
   :lotAttestation/apiName "sodium cromoglicate"
   :lotAttestation/manufacturingDate "2026-06-01"
   :lotAttestation/expirationDate "2027-06-01"
-  :lotAttestation/apiName "sodium cromoglicate"}
+  }
 
  ;; Silen pharma review (Council attestation example)
  {:db/id "review:silen:w1"

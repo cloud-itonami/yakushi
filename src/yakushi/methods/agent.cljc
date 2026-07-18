@@ -1,4 +1,4 @@
-(ns yakushi.py.agent
+(ns yakushi.methods.agent
   "yakushi 薬師 — pharmaceutical R&D cell. 1:1 port of py/agent.py. Handlers over the pharma schema
   with constitutional gates: G1 OTC-only Wave-1, G2 published-literature routes, G3 silen-pharma-
   review, G4 QP co-sign (no-server-key G18), G5/G10 adverse-event aggregation (lot+severity+outcome,

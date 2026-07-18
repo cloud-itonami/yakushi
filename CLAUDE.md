@@ -1,4 +1,4 @@
-# 20-actors/yakushi — CLAUDE rules
+# yakushi standalone actor — CLAUDE rules
 
 Tier-B per-domain leader actor for religious-corp first-party pharmaceutical R&D.
 Per [ADR-2605250500](../../90-docs/adr/2605250500-yakushi-pharmaceutical-rd-charter.md)
@@ -43,13 +43,13 @@ Wave 2 adds **disinfectant / antiseptic FORMULATION** (希釈・配合, NOT de-n
   This is the actor-level implementation of the weaponizable-unrepresentable invariant.
 - **G23 flammable-labeling** — alcohol actives require 火気厳禁 / flammable on the label (extends G11 lint).
 - **G24 use-class** — each product declares `{surface, skin-antiseptic, hand-hygiene}`.
-- clj-native SSoT: Wave 2 logic lives only in `py/agent.clj` + `py/test_agent.clj` (no Python counterpart —
+- clj-native SSoT: Wave 2 logic lives in `src/yakushi/methods/agent.cljc` with tests under `test/yakushi` (no Python counterpart —
   the clj-as-SSoT direction). G1..G20 inherited unchanged.
 
 ## Cell pattern (per ADR-2605192415 §B, silicon Wave 1 silicon_* mirror)
 
 ```
-kotoba-lang/kotodama-cells/pharma_{phase_name}/
+40-engine/kotoba/crates/kotoba-kotodama/cells/pharma_{phase_name}/
 ├── README.md                 # input/output Lexicon + state schema
 ├── __init__.py               # one-line module marker
 ├── cell.py                   # COUNCIL_ATTESTATION_TX_HASH + SILEN_PHARMA_BASELINE_REVIEW_CID gate
@@ -96,5 +96,5 @@ Do NOT skip phases. Each R transition is its own ADR.
 - [ADR-2605192415](../../90-docs/adr/2605192415-etzhayyim-religious-corp-daemon-architecture.md) (3-tier actor + Murakumo placement)
 - [ADR-2605181100](../../90-docs/adr/2605181100-etzhayyim-encrypted-confidentiality-substrate.md) (XChaCha20 envelope for patient AE)
 - [ADR-2605231525](../../90-docs/adr/2605231525-no-server-key-invariant.md) (G13 enforcement)
-- [`20-actors/kuni-umi/CLAUDE.md`](../kuni-umi/CLAUDE.md) (sibling actor — robotics class ontology source)
-- [`kotoba-lang/kotodama-cells/README.md`](../kotodama/cells/README.md) (sibling cell catalog)
+- [`orgs/etzhayyim/com-etzhayyim-kuni-umi/CLAUDE.md`](../kuni-umi/CLAUDE.md) (sibling actor — robotics class ontology source)
+- [`40-engine/kotoba/crates/kotoba-kotodama/cells/README.md`](../kotodama/cells/README.md) (sibling cell catalog)
