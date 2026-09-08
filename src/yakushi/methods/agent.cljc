@@ -4,7 +4,7 @@
   review, G4 QP co-sign (no-server-key G18), G5/G10 adverse-event aggregation (lot+severity+outcome,
   no patient DID), G9 witness N≥2, G17 USDC + 10% tithe (stops at :intent). Pure compute; the
   Murakumo llm host binding is the omitted leg (unused here)."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def TITHE-BPS 1000)
 (def ^:private VALID-SEVERITIES #{"mild" "moderate" "severe"})
@@ -17,12 +17,12 @@
   "LLM_NOT_AVAILABLE")
 
 (defn api-otc-ok [api-inn-slug]
-  (if-not (contains? WAVE-1-APIS (str/lower-case api-inn-slug))
+  (if-not (contains? WAVE-1-APIS (str/lower api-inn-slug))
     {"ok" false "reason" (str "API " api-inn-slug " not in Wave 1 OTC reference (G1)")}
     {"ok" true "reason" "OTC off-patent confirmed (Wave 1)"}))
 
 (defn review-attested [review-verdict review-scope]
-  (if-not (= (str/lower-case review-verdict) "approve")
+  (if-not (= (str/lower review-verdict) "approve")
     {"ok" false "reason" (str "silen-pharma-review verdict is " review-verdict " (G3)")}
     {"ok" true "reason" (str "silen-pharma-review approved for " review-scope)}))
 
@@ -34,8 +34,8 @@
 (defn adverse-event-ok [lot-id severity outcome]
   (cond
     (not (seq lot-id)) {"ok" false "reason" "lot_id required; patient DID prohibited (G5/G10)"}
-    (not (contains? VALID-SEVERITIES (str/lower-case severity))) {"ok" false "reason" (str "severity " severity " not in " VALID-SEVERITIES)}
-    (not (contains? VALID-OUTCOMES (str/lower-case outcome))) {"ok" false "reason" (str "outcome " outcome " not in " VALID-OUTCOMES)}
+    (not (contains? VALID-SEVERITIES (str/lower severity))) {"ok" false "reason" (str "severity " severity " not in " VALID-SEVERITIES)}
+    (not (contains? VALID-OUTCOMES (str/lower outcome))) {"ok" false "reason" (str "outcome " outcome " not in " VALID-OUTCOMES)}
     :else {"ok" true "reason" (str "AE aggregation by lot " lot-id " (no patient identity)")}))
 
 (defn witness-quorum-ok [witness-dids]
@@ -44,7 +44,7 @@
     {"ok" true "reason" (str "witness quorum N=" (count witness-dids) " >= 2")}))
 
 (defn record-raw-material [material-name grade hazard-class]
-  (if-not (contains? #{"公定" "劇物" "koujou" "gekibutsu"} (str/lower-case grade))
+  (if-not (contains? #{"公定" "劇物" "koujou" "gekibutsu"} (str/lower grade))
     {"error" (str "grade " grade " must be 公定 or 劇物") "blocked" true}
     {":rawMaterialAttestation/id" (str "rm:" material-name)
      ":rawMaterialAttestation/materialName" material-name
@@ -65,7 +65,7 @@
            ":apiSynthesisAttestation/witness2" (if (> (count witness-dids) 1) (nth witness-dids 1) "")})))))
 
 (defn record-fill [product-form sterile-process witness-operator witness-qp]
-  (if-not (contains? #{"aseptic-0.22µm-filter" "terminal-autoclave"} (str/lower-case sterile-process))
+  (if-not (contains? #{"aseptic-0.22µm-filter" "terminal-autoclave"} (str/lower sterile-process))
     {"error" (str "sterile_process " sterile-process " must be aseptic or autoclave (G8)") "blocked" true}
     {":fillFinishAttestation/id" (str "ff:" product-form)
      ":fillFinishAttestation/productForm" product-form

@@ -21,7 +21,7 @@
 
   Reads local lexicons via clojure.edn. It weakens no gate; it asserts them. The no-server-key
   (G13: hardware-token/passkey QP key only) + Murakumo-only (manifest) invariants are untouched."
-  (:require [clojure.test :refer [deftest is run-tests]]
+  (:require [kotoba.lang.text] [clojure.test :refer [deftest is run-tests]]
             [clojure.edn :as edn]
             [cheshire.core :as json]))
 
@@ -89,7 +89,7 @@
         props (prop-names ae)]
     (is (every? keyed ["lotId" "severity" "outcome"])
         "G10: adverse events keyed by lot + severity + outcome")
-    (is (empty? (filter #(clojure.string/includes? (clojure.string/lower-case %) "patient") props))
+    (is (empty? (filter #(kotoba.lang.text/includes? (kotoba.lang.text/lower %) "patient") props))
         "G10: adverseEventReport must carry NO patient identity field")))
 
 ;; ── G7 — CWC dual-use precursor monitoring ──
