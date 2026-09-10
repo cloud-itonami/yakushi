@@ -43,7 +43,7 @@ Wave 2 adds **disinfectant / antiseptic FORMULATION** (希釈・配合, NOT de-n
   This is the actor-level implementation of the weaponizable-unrepresentable invariant.
 - **G23 flammable-labeling** — alcohol actives require 火気厳禁 / flammable on the label (extends G11 lint).
 - **G24 use-class** — each product declares `{surface, skin-antiseptic, hand-hygiene}`.
-- clj-native SSoT: Wave 2 logic lives in `src/yakushi/methods/agent.cljc` with tests under `test/yakushi` (no Python counterpart —
+- clj-native SSoT: Wave 2 logic lives in `src/yakushi/methods/agent.kotoba` with tests under `test/yakushi` (no Python counterpart —
   the clj-as-SSoT direction). G1..G20 inherited unchanged.
 
 ## Cell pattern (per ADR-2605192415 §B, silicon Wave 1 silicon_* mirror)

@@ -89,7 +89,7 @@ Wave 1/1b/1c は **薬** (de-novo 合成 OTC 医薬品)。Wave 2 は **消毒液
 - **G23 flammable-labeling** — アルコール系は火気厳禁ラベル必須
 - **G24 use-class** — `{surface, skin-antiseptic, hand-hygiene}` を宣言
 
-実装は **clj-native SSoT** (`src/yakushi/methods/agent.cljc`、tests は
+実装は **clj-native SSoT** (`src/yakushi/methods/agent.kotoba`、tests は
 `test/yakushi`)。canonical metadata/data/contracts は EDN、外部 JSON-LD は
 `wire/` のみに置く。全 suite は `bb test` で実行する。
 新 cell `formulation` + lex `formulationAttestation` + entity `:formulationAttestation/*`。Python counterpart なし。
